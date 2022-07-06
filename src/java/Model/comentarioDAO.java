@@ -22,10 +22,10 @@ public class comentarioDAO {
         List<comentarioBean> todos = new ArrayList<>();
         
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
-            String sql = "SELECT * FROM comentario "
-                    + "INNER JOIN topico ON (com_top_codigo = top_codigo)"
-                    + "INNER JOIN usuario ON (top_usu_login = login)"
-                    + "WHERE top_codigo = ?";
+            String sql = "SELECT * FROM comentario"
+                    + " INNER JOIN topico ON (com_top_codigo = top_codigo)"
+                    + " INNER JOIN usuario ON (top_usu_login = login)"
+                    + " WHERE top_codigo = ?";
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, codigo);
             ResultSet rs = stmt.executeQuery();
