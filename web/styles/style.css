@@ -21,3 +21,8 @@ h1{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
 }
+
+a{
+    width: 10%;
+    text-decoration: none;
+}
