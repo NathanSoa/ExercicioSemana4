@@ -20,7 +20,7 @@
     
     <main>
         <h1>Insira suas informações</h1>
-        <form action="cadastrar" method="post">
+        <form action="../cadastrar" method="post">
             <label for="login">Login</label>
             <input type="text" name="login" id="login" class="entradas" placeholder="Digite seu login">
     
