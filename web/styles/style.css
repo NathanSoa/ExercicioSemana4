@@ -26,3 +26,8 @@ a{
     width: 10vw;
     text-decoration: none;
 }
+
+td{
+    padding: 3px;
+    margin: 3px;
+}
