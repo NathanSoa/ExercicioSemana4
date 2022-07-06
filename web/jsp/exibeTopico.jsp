@@ -32,7 +32,9 @@
         </c:forEach>
 
         <section id="formComentario">
-            <form action="../comentar?codigo=${codigo}" method="post">
+            <h2>Faça seu comentário: </h2>
+            <br/>
+            <form action="comentar?codigo=${codigo}" method="post">
                 <textarea name="comentario" rows="10" cols="90"></textarea> 
                 
                 <input type="submit" value="comentar" class="botao"/>
