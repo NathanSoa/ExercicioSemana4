@@ -18,15 +18,17 @@
         <h1>
             <c:out value="${topico.titulo}"/>
         </h1>
-        <h2>
+        <h3>
             Autor: <c:out value="${topico.usuario}"/>
-        </h2>
+        </h3>
         <p>
             <c:out value="${topico.conteudo}"/>
         </p>
         <c:forEach var="comentario" items="${comentarios}">
-            <p>${comentario.comentario}</p>
-            <p>${comentario.usuario.nome}</p>
+            <section class="comentario">
+                <p>${comentario.comentario}</p>
+                <p> &nbsp;&nbsp;&nbsp;&nbsp;-${comentario.usuario.nome}</p>
+            </section>
         </c:forEach>
     </main>
 </body>
