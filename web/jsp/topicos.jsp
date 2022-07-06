@@ -28,7 +28,7 @@
                         <tr>
                             <td>${item.titulo}</td>
                             <td>${item.usuario}</td>
-                            <td><a href="jsp/exibeTopico?topico=${item.codigo}" class="botao">Ir para o Tópico</a></td>
+                            <td><a href="exibeTopico?topico=${item.codigo}" class="botao">Ir para o Tópico</a></td>
                         </tr>
                 </c:forEach>
             </tbody>
