@@ -1,11 +1,12 @@
 package controller;
 
+import Model.comentarioBean;
+import Model.comentarioDAO;
 import Model.topicoBean;
 import Model.topicosDAO;
 import Model.usuarioBean;
 import Model.usuarioDAO;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +14,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar"})
+@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar", "/exibeTopico"})
 public class Controller extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();  
     topicosDAO topicoDAO = new topicosDAO();
+    comentarioDAO comentarioDAO = new comentarioDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
+        switch(request.getServletPath()){
+            
+            case "/exibeTopico":
+                exibeTopico(request, response);
+                break;
+        } 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
         switch(request.getServletPath()){
             
             case "/autenticar":
@@ -62,5 +69,15 @@ public class Controller extends HttpServlet {
         usuarioDAO.cadastrar(u);
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+    
+    private void exibeTopico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String codigo = request.getParameter("topico");
+        topicoBean topico = topicoDAO.retornaTopico(Integer.valueOf(codigo));
+        List<comentarioBean> comentarios = comentarioDAO.todosComentarios(Integer.valueOf(codigo));
+        request.setAttribute("topico", topico);
+        request.setAttribute("comentarios", comentarios);
+        
+        request.getRequestDispatcher("jsp/exibeTopico.jsp").forward(request, response);
     }
 }
