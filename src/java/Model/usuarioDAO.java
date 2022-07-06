@@ -54,6 +54,6 @@ public class usuarioDAO {
     }
     
     usuarioBean montaObjeto(ResultSet rs) throws SQLException{
-        return new usuarioBean(rs.getString("codigo"), rs.getString("email"), rs.getString("nome"),rs.getString("senha"), rs.getInt("pontos"));        
+        return new usuarioBean(rs.getString("login"), rs.getString("email"), rs.getString("nome"),rs.getString("senha"), rs.getInt("pontos"));        
     }
 }
