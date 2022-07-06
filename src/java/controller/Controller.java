@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar", "/exibeTopico"})
+@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar", "/exibeTopico", "/comentar"})
 public class Controller extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();  
@@ -43,6 +43,10 @@ public class Controller extends HttpServlet {
             case "/cadastrar":
                 cadastrar(request, response);
                 break;
+                
+            case "/comentar":
+                comentar(request, response);
+                break;
         }
     }
     
@@ -53,6 +57,7 @@ public class Controller extends HttpServlet {
         if(!nome.equalsIgnoreCase("Erro")){
             List<topicoBean> lista = topicoDAO.todosTopicos(request.getParameter("login"));
             request.setAttribute("topicos", lista);
+            request.getSession().setAttribute("loginUsuario", request.getParameter("login"));
             request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -73,11 +78,21 @@ public class Controller extends HttpServlet {
     
     private void exibeTopico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String codigo = request.getParameter("topico");
-        topicoBean topico = topicoDAO.retornaTopico(Integer.valueOf(codigo));
+        request.setAttribute("codigo", codigo);
+        topicoBean topico = topicoDAO.retornaTopico(Integer.parseInt(codigo));
         List<comentarioBean> comentarios = comentarioDAO.todosComentarios(Integer.valueOf(codigo));
         request.setAttribute("topico", topico);
         request.setAttribute("comentarios", comentarios);
         
         request.getRequestDispatcher("jsp/exibeTopico.jsp").forward(request, response);
+    }
+    
+    private void comentar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String comentario = request.getParameter("comentario");
+        String codigoTopico = request.getParameter("codigo");
+        String loginUsuario = (String) request.getSession().getAttribute("loginUsuario");
+        
+        comentarioDAO.fazerComentario(comentario, loginUsuario, Integer.valueOf(codigoTopico));
+        response.sendRedirect("exibeTopico?topico="+codigoTopico);
     }
 }
