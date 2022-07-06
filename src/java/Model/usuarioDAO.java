@@ -37,7 +37,7 @@ public class usuarioDAO {
     }
     
     public void cadastrar(usuarioBean u){
-        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1.3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
             String sql = "INSERT INTO usuario(login, nome, email, senha, pontos) VALUES(?, ?, ?, ?, 0)";
             PreparedStatement stmt = c.prepareStatement(sql);
             
@@ -45,6 +45,7 @@ public class usuarioDAO {
             stmt.setString(2, u.getNome());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getSenha());
+            
             stmt.executeUpdate();
             
         }catch(SQLException e){
