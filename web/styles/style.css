@@ -6,6 +6,26 @@ h1{
     color:mediumpurple;
 }
 
+a{
+    width: 10vw;
+    text-decoration: none;
+}
+
+td{
+    padding: 3px;
+    margin: 3px;
+}
+
+textarea{
+    vertical-align: baseline;
+    resize: none;
+}
+
+#formComentario{
+    border-top: 2px solid grey;
+    padding: 10px 0;
+}
+
 .entradas{
     display: block;
     margin-bottom: 10px;
@@ -27,14 +47,4 @@ h1{
     width: 60%;
     padding-left:10px;
     margin: 8px 2px;
-}
-
-a{
-    width: 10vw;
-    text-decoration: none;
-}
-
-td{
-    padding: 3px;
-    margin: 3px;
 }
