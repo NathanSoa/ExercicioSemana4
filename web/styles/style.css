@@ -1,0 +1,23 @@
+body{
+	font-family: 'Anek Malayalam', sans-serif;
+}
+
+h1{
+    color:mediumpurple;
+}
+
+.entradas{
+    display: block;
+    margin-bottom: 10px;
+    border: 2px solid grey;
+}
+
+.botao{
+    display: block;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 5%;
+    padding: 1em 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+}
