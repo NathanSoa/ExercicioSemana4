@@ -39,7 +39,25 @@ public class topicosDAO {
         return todos;
     }
     
-    private topicoBean montaObjeto(ResultSet rs)throws SQLException{
+    public topicoBean retornaTopico(int codigo){
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "SELECT * FROM topico WHERE top_codigo = ?";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, codigo);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                return montaObjeto(rs);
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    topicoBean montaObjeto(ResultSet rs)throws SQLException{
         return new topicoBean(String.valueOf(rs.getInt("top_codigo")), rs.getString("top_titulo"), rs.getString("top_conteudo"), rs.getString("top_usu_login"));
     }
 }
