@@ -27,6 +27,8 @@ public class Controller extends HttpServlet {
                 request.setAttribute("nome", nome);
                 if(!nome.equalsIgnoreCase("Erro")){
                     request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);
+                }else{
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
         }
     }
