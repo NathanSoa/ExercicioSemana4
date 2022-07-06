@@ -30,6 +30,14 @@
                 <p> &nbsp;&nbsp;&nbsp;&nbsp;-${comentario.usuario.nome}</p>
             </section>
         </c:forEach>
+
+        <section id="formComentario">
+            <form action="../comentar?codigo=${codigo}" method="post">
+                <textarea name="comentario" rows="10" cols="90"></textarea> 
+                
+                <input type="submit" value="comentar" class="botao"/>
+            </form>
+        </section>
     </main>
 </body>
 </html>
