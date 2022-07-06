@@ -14,15 +14,27 @@
 <title>Tópicos</title>
 </head>
 <body>
-    <h1>Insira seu login e senha abaixo: </h1>
-    <form action="autenticar" method="post">
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login" class="entradas">
+    <header>
+        <h1 style="color: black;">BEM-VINDO</h1>
+    </header>
 
-        <label for="Senha">Senha</label>
-        <input type="password" name="senha" id="Senha" class="entradas">
+    <main>
+        <h1>Insira seu login e senha abaixo: </h1>
+        <form action="autenticar" method="post">
+            <label for="login">Login</label>
+            <input type="text" name="login" id="login" class="entradas">
+    
+            <label for="Senha">Senha</label>
+            <input type="password" name="senha" id="Senha" class="entradas">
+    
+            <input type="submit" value="Entrar" class="botao">
+        </form>
 
-        <input type="submit" value="Entrar" class="botao">
-    </form>
+        <c:set var="nome" scope="request" value="${nome}"/>
+        <c:if test="${nome == 'Erro'}">
+            <h2>Não foi possível se conectar!</h2>
+            <a href="jsp/cadastro.jsp" class="botao">Criar uma conta</a>
+        </c:if>
+    </main>
 </body>
 </html>
