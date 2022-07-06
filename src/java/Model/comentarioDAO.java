@@ -12,7 +12,7 @@ public class comentarioDAO {
     
     static{
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }catch(ClassNotFoundException e){
             e.printStackTrace();
         }    
@@ -38,6 +38,22 @@ public class comentarioDAO {
             e.printStackTrace();
         }
         return todos;
+    }
+    
+    public void fazerComentario(String comentario, String login, int codigoTopico){
+        
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "INSERT INTO comentario (com_comentario, com_login, com_top_codigo) values (?, ?, ?)";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            
+            stmt.setString(1, comentario);
+            stmt.setString(2, login);
+            stmt.setInt(3, codigoTopico);
+            
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
     private comentarioBean montaObjeto(ResultSet rs) throws SQLException{
