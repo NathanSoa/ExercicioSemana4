@@ -41,5 +41,9 @@
             </form>
         </section>
     </main>
+                
+    <footer>
+        <a href="javascript:history.go(-1)" class="botao">Voltar para a página de tópicos</a>
+    </footer>
 </body>
 </html>
