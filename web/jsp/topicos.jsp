@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,25 @@
 <title>Tópicos</title>
 </head>
 <body>
-	<h1>Bem Vindo ${nome}</h1>
+    <h1>Bem Vindo ${nome}</h1>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                   <th>Título</th>
+                   <th>Usuário</th>
+                </tr>         
+            </thead>
+            <tbody>
+                <c:forEach var="item" items="${topicos}"> 
+                        <tr>
+                            <td>${item.titulo}</td>
+                            <td>${item.usuario}</td>
+                            <td><a href="jsp/exibeTopico?topico=${item.codigo}" class="botao">Ir para o Tópico</a></td>
+                        </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>
