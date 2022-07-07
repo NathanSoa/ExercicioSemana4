@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar"})
+@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar", "/criarTopico"})
 public class Controller extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();  
@@ -55,6 +55,10 @@ public class Controller extends HttpServlet {
                 
             case "/comentar":
                 comentar(request, response);
+                break;
+                
+            case "/criarTopico":
+                criarTopico(request, response);
                 break;
         }
     }
@@ -107,5 +111,20 @@ public class Controller extends HttpServlet {
         
         comentarioDAO.fazerComentario(comentario, loginUsuario, Integer.valueOf(codigoTopico));
         response.sendRedirect("exibeTopico?topico="+codigoTopico);
+    }
+    
+    private void criarTopico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String titulo = request.getParameter("titulo");
+        String conteudo = request.getParameter("conteudo");
+        String loginUsuario = (String) request.getSession().getAttribute("loginUsuario");
+        
+        topicoBean t = new topicoBean();
+        t.setConteudo(conteudo);
+        t.setTitulo(titulo);
+        t.setUsuario(loginUsuario);
+        
+        topicoDAO.insereTopico(t);
+        
+        request.getRequestDispatcher("main").forward(request, response);     
     }
 }
