@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar", "/criarTopico"})
+@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar", "/criarTopico", "/ranking"})
 public class Controller extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();  
@@ -32,6 +32,10 @@ public class Controller extends HttpServlet {
                 
             case "/exibeTopico":
                 exibeTopico(request, response);
+                break;
+                
+            case "/ranking":
+                exibeRanking(request, response);
                 break;
         } 
     }
@@ -126,5 +130,13 @@ public class Controller extends HttpServlet {
         topicoDAO.insereTopico(t);
         
         request.getRequestDispatcher("main").forward(request, response);     
+    }
+    
+    private void exibeRanking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        List<usuarioBean> ranking = usuarioDAO.ranking();
+        request.setAttribute("ranking", ranking);
+        
+        request.getRequestDispatcher("jsp/ranking.jsp").forward(request, response);
     }
 }
