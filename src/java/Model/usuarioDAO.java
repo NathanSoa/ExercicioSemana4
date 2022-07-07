@@ -89,6 +89,20 @@ public class usuarioDAO {
         }
         return ranking;
     }
+    
+    public void acrescentaPontos(int pontos, String login){
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "UPDATE usuario SET pontos = (pontos + ?) WHERE login = ?";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, pontos);
+            stmt.setString(2, login);
+            
+            stmt.executeUpdate();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
         
     usuarioBean montaObjeto(ResultSet rs) throws SQLException{
         return new usuarioBean(rs.getString("login"), rs.getString("email"), rs.getString("nome"),rs.getString("senha"), rs.getInt("pontos"));        
