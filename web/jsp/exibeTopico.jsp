@@ -26,8 +26,8 @@
         </p>
         <c:forEach var="comentario" items="${comentarios}">
             <section class="comentario">
-                <p>${comentario.comentario}</p>
-                <p> &nbsp;&nbsp;&nbsp;&nbsp;-${comentario.usuario}</p>
+                <p><c:out value="${comentario.comentario}"/></p>
+                <p> &nbsp;&nbsp;&nbsp;&nbsp;-<c:out value="${comentario.usuario}"/></p>
             </section>
         </c:forEach>
 

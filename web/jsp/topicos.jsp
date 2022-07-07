@@ -14,7 +14,7 @@
 <title>Tópicos</title>
 </head>
 <body>
-    <h1>Bem Vindo ${nome}</h1>
+    <h1>Bem Vindo <c:out value="${nome}"/></h1>
     <main>
         <table>
             <thead>
@@ -26,8 +26,8 @@
             <tbody>
                 <c:forEach var="item" items="${topicos}"> 
                         <tr>
-                            <td>${item.titulo}</td>
-                            <td>${item.usuario}</td>
+                            <td><c:out value="${item.titulo}"/></td>
+                            <td><c:out value="${item.usuario}"/></td>
                             <td><a href="<c:url value="exibeTopico?topico=${item.codigo}"/>" class="botao" target="_blank">Ir para o Tópico</a></td>
                         </tr>
                 </c:forEach>
