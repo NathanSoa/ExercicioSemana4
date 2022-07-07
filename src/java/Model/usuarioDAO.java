@@ -45,7 +45,6 @@ public class usuarioDAO {
             ResultSet rs = stmt.executeQuery();
             
             if(rs.next()){
-                JOptionPane.showMessageDialog(null, rs.getString("nome"));
                 return rs.getString("nome");
             }
             
