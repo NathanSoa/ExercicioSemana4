@@ -39,5 +39,8 @@
             </tbody>
         </table>
     </main>
+    <footer>
+        <a href="<c:url value="main"/>" class="botao">Voltar</a>
+    </footer>
 </body>
 </html>

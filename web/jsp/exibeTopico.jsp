@@ -40,10 +40,9 @@
                 <input type="submit" value="comentar" class="botao"/>
             </form>
         </section>
-    </main>
-                
+    </main>             
     <footer>
-        <a href="<c:url value="main"/>" class="botao" id="ancora">Voltar para a página de tópicos</a>
+        <a href="<c:url value="main"/>" class="botao" id="ancora">Voltar</a>
     </footer>
 </body>
 </html>

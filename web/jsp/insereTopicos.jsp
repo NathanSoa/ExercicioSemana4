@@ -29,5 +29,9 @@
             <input type="submit" value="Criar" class="botao">
         </form>
     </main>
+    <br/>
+    <footer>
+        <a href="<c:url value="../main"/>" class="botao">Voltar</a>
+    </footer>
 </body>
 </html>
