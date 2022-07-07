@@ -53,3 +53,21 @@ textarea{
     padding-left:10px;
     margin: 8px 2px;
 }
+
+.botoesTopicos{    
+    justify-content: space-between;
+    width: 31vw;
+    text-align: center;
+    margin-top: 1%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.criacao{
+    width: 14vw;
+    background-color: #fab37d;
+}
+
+.ranking{
+    background-color: #aaf0ad; 
+}

@@ -33,9 +33,10 @@
                 </c:forEach>
             </tbody>
         </table>
-        <br/>
-        <a href="<c:url value="jsp/insereTopicos.jsp"/>" class="botao">Criar novo tópico</a>
-        <a href="<c:url value="ranking"/>" class="botao">Ver Ranking</a>
+        <div class="botoesTopicos">
+            <a href="<c:url value="jsp/insereTopicos.jsp"/>" class="botao criacao">Criar novo tópico</a>
+            <a href="<c:url value="ranking"/>" class="botao ranking">Ver Ranking</a>
+        </div>
     </main>
 </body>
 </html>
