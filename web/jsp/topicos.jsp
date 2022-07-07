@@ -33,6 +33,8 @@
                 </c:forEach>
             </tbody>
         </table>
+        <br/>
+        <a href="<c:url value="jsp/insereTopicos.jsp"/>" class="botao">Criar novo tópico</a>
     </main>
 </body>
 </html>
