@@ -114,6 +114,7 @@ public class Controller extends HttpServlet {
         String loginUsuario = (String) request.getSession().getAttribute("loginUsuario");
         
         comentarioDAO.fazerComentario(comentario, loginUsuario, Integer.valueOf(codigoTopico));
+        adicionaPontos(loginUsuario, "3");
         response.sendRedirect("exibeTopico?topico="+codigoTopico);
     }
     
@@ -128,6 +129,8 @@ public class Controller extends HttpServlet {
         t.setUsuario(loginUsuario);
         
         topicoDAO.insereTopico(t);
+ 
+        adicionaPontos(loginUsuario, "10");
         
         request.getRequestDispatcher("main").forward(request, response);     
     }
@@ -138,5 +141,10 @@ public class Controller extends HttpServlet {
         request.setAttribute("ranking", ranking);
         
         request.getRequestDispatcher("jsp/ranking.jsp").forward(request, response);
+    }
+    
+    private void adicionaPontos(String login, String pontos){
+        
+        usuarioDAO.acrescentaPontos(login, Integer.valueOf(pontos));
     }
 }
