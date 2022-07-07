@@ -19,13 +19,12 @@ public class topicosDAO {
         }    
     }
     
-    public List<topicoBean> todosTopicos(String login){
+    public List<topicoBean> todosTopicos(){
         List<topicoBean> todos = new ArrayList<>();
         
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
-            String sql = "SELECT * FROM topico WHERE top_usu_login = ?";
+            String sql = "SELECT * FROM topico";
             PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setString(1, login);
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){

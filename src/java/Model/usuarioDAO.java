@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class usuarioDAO {
@@ -36,6 +37,25 @@ public class usuarioDAO {
         return "Erro";
     }
     
+    public String retornaNome(String login){
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "SELECT nome FROM usuario WHERE login = ?";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, rs.getString("nome"));
+                return rs.getString("nome");
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return "Erro";
+    }
+    
     public void cadastrar(usuarioBean u){
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
             String sql = "INSERT INTO usuario(login, nome, email, senha, pontos) VALUES(?, ?, ?, ?, 0)";
@@ -52,7 +72,7 @@ public class usuarioDAO {
             e.printStackTrace();
         }
     }
-    
+        
     usuarioBean montaObjeto(ResultSet rs) throws SQLException{
         return new usuarioBean(rs.getString("login"), rs.getString("email"), rs.getString("nome"),rs.getString("senha"), rs.getInt("pontos"));        
     }

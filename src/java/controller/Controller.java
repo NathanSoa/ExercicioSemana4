@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 @WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar", "/exibeTopico", "/comentar"})
 public class Controller extends HttpServlet {
@@ -55,7 +56,7 @@ public class Controller extends HttpServlet {
         request.setAttribute("nome", nome);
         
         if(!nome.equalsIgnoreCase("Erro")){
-            List<topicoBean> lista = topicoDAO.todosTopicos(request.getParameter("login"));
+            List<topicoBean> lista = topicoDAO.todosTopicos();
             request.setAttribute("topicos", lista);
             request.getSession().setAttribute("loginUsuario", request.getParameter("login"));
             request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);
