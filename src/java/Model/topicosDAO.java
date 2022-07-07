@@ -56,6 +56,21 @@ public class topicosDAO {
         return null;
     }
     
+    public void insereTopico(topicoBean topico){
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "INSERT INTO topico(top_titulo, top_conteudo, top_usu_login) VALUES (?, ?, ?)";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setString(1, topico.getTitulo());
+            stmt.setString(2, topico.getConteudo());
+            stmt.setString(3, topico.getUsuario());
+            
+            stmt.executeUpdate();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     topicoBean montaObjeto(ResultSet rs)throws SQLException{
         return new topicoBean(String.valueOf(rs.getInt("top_codigo")), rs.getString("top_titulo"), rs.getString("top_conteudo"), rs.getString("nome"));
     }
