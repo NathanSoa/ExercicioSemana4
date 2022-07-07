@@ -26,6 +26,11 @@ textarea{
     padding: 10px 0;
 }
 
+#ancora{
+    width: 200px;
+    border: 1px solid black;
+}
+
 .entradas{
     display: block;
     margin-bottom: 10px;

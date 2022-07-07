@@ -43,7 +43,7 @@
     </main>
                 
     <footer>
-        <a href="javascript:history.go(-1)" class="botao">Voltar para a página de tópicos</a>
+        <a href="javascript:history.go(-1)" class="botao" id="ancora">Voltar para a página de tópicos</a>
     </footer>
 </body>
 </html>
