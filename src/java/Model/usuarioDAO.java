@@ -90,7 +90,7 @@ public class usuarioDAO {
         return ranking;
     }
     
-    public void acrescentaPontos(int pontos, String login){
+    public void acrescentaPontos(String login, int pontos){
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
             String sql = "UPDATE usuario SET pontos = (pontos + ?) WHERE login = ?";
             PreparedStatement stmt = c.prepareStatement(sql);
