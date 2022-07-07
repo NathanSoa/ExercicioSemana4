@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class usuarioDAO {
@@ -70,6 +71,23 @@ public class usuarioDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public List<usuarioBean> ranking(){
+        List<usuarioBean> ranking = new ArrayList<>();
+        try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
+            String sql = "SELECT * FROM usuario ORDER BY pontos desc";
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                ranking.add(montaObjeto(rs));
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return ranking;
     }
         
     usuarioBean montaObjeto(ResultSet rs) throws SQLException{
