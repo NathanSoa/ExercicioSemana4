@@ -11,24 +11,29 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;700&display=swap" rel="stylesheet">
-<title>Tópicos</title>
+<title>Ranking</title>
 </head>
 <body>
-    <h1>Bem Vindo ${nome}</h1>
+    <h1>Ranking dos nossos usuários</h1>
     <main>
+        <c:set var="colocacao" scope = "request" value = "${1}"/>
         <table>
             <thead>
                 <tr>
-                   <th>Título</th>
-                   <th>Usuário</th>
+                   <th>Colocação</th>
+                   <th>Nome</th>
+                   <th>Login</th>
+                   <th>Pontos</th>
                 </tr>         
             </thead>
             <tbody>
-                <c:forEach var="item" items="${topicos}"> 
-                        <tr>
-                            <td>${item.titulo}</td>
-                            <td>${item.usuario}</td>
-                            <td><a href="<c:url value="exibeTopico?topico=${item.codigo}"/>" class="botao" target="_blank">Ir para o Tópico</a></td>
+                <c:forEach var="item" items="${ranking}"> 
+                    <tr>
+                        <td><c:out value="${colocacao}"/></td>
+                        <c:set var="colocacao" scope="request" value="${colocacao + 1}"/>
+                        <td><c:out value="${item.nome}"/></td>
+                        <td><c:out value="${item.login}"/></td>
+                        <td><c:out value="${item.pontos}"/></td>
                         </tr>
                 </c:forEach>
             </tbody>
