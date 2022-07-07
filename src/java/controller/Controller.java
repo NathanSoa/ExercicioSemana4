@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 @WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar"})
 public class Controller extends HttpServlet {
@@ -61,7 +60,6 @@ public class Controller extends HttpServlet {
     }
     
     private void main(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        JOptionPane.showMessageDialog(null, "recebida requisição main");
         List<topicoBean> lista = topicoDAO.todosTopicos();
         request.setAttribute("topicos", lista);
         request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);

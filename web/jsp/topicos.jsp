@@ -28,7 +28,7 @@
                         <tr>
                             <td>${item.titulo}</td>
                             <td>${item.usuario}</td>
-                            <td><a href="exibeTopico?topico=${item.codigo}" class="botao" target="_blank">Ir para o Tópico</a></td>
+                            <td><a href="<c:url value="exibeTopico?topico=${item.codigo}"/>" class="botao" target="_blank">Ir para o Tópico</a></td>
                         </tr>
                 </c:forEach>
             </tbody>
