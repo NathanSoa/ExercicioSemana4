@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
-@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/cadastrar", "/exibeTopico", "/comentar"})
+@WebServlet(name = "Controller", urlPatterns = {"/autenticar", "/main", "/cadastrar", "/exibeTopico", "/comentar"})
 public class Controller extends HttpServlet {
 
     usuarioDAO usuarioDAO = new usuarioDAO();  
@@ -27,6 +27,10 @@ public class Controller extends HttpServlet {
       
         switch(request.getServletPath()){
             
+            case "/main":
+                main(request, response);
+                break;
+                
             case "/exibeTopico":
                 exibeTopico(request, response);
                 break;
@@ -35,8 +39,13 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         switch(request.getServletPath()){
             
+            case "/main":
+                main(request, response);
+                break;
+                
             case "/autenticar":
                 autenticar(request, response);
                 break;
@@ -51,15 +60,20 @@ public class Controller extends HttpServlet {
         }
     }
     
+    private void main(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        JOptionPane.showMessageDialog(null, "recebida requisição main");
+        List<topicoBean> lista = topicoDAO.todosTopicos();
+        request.setAttribute("topicos", lista);
+        request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);
+    }
+    
     private void autenticar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String nome = usuarioDAO.autenticar(request.getParameter("login"), request.getParameter("senha"));
         request.setAttribute("nome", nome);
         
         if(!nome.equalsIgnoreCase("Erro")){
-            List<topicoBean> lista = topicoDAO.todosTopicos();
-            request.setAttribute("topicos", lista);
             request.getSession().setAttribute("loginUsuario", request.getParameter("login"));
-            request.getRequestDispatcher("jsp/topicos.jsp").forward(request, response);
+            request.getRequestDispatcher("main").forward(request, response);
         }else{
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
