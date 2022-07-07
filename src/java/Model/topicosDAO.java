@@ -23,7 +23,7 @@ public class topicosDAO {
         List<topicoBean> todos = new ArrayList<>();
         
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
-            String sql = "SELECT * FROM topico";
+            String sql = "SELECT * FROM topico INNER JOIN usuario ON (top_usu_login = login)";
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             
@@ -40,7 +40,7 @@ public class topicosDAO {
     
     public topicoBean retornaTopico(int codigo){
         try(Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "usuarioTeste", "senhaPadrao")){
-            String sql = "SELECT * FROM topico WHERE top_codigo = ?";
+            String sql = "SELECT * FROM topico INNER JOIN usuario ON (top_usu_login = login) WHERE top_codigo = ?";
             PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, codigo);
             ResultSet rs = stmt.executeQuery();
@@ -57,6 +57,6 @@ public class topicosDAO {
     }
     
     topicoBean montaObjeto(ResultSet rs)throws SQLException{
-        return new topicoBean(String.valueOf(rs.getInt("top_codigo")), rs.getString("top_titulo"), rs.getString("top_conteudo"), rs.getString("top_usu_login"));
+        return new topicoBean(String.valueOf(rs.getInt("top_codigo")), rs.getString("top_titulo"), rs.getString("top_conteudo"), rs.getString("nome"));
     }
 }
